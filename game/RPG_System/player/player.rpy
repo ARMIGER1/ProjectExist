@@ -92,7 +92,14 @@ init -1 python:
             # Try to attack
             hitdice = renpy.random.randint(0, 100)
 
-            # TODO: Subtract relevant move costs
+            # For now, this only seems to work if all the following variables
+            # are present.
+            for key, value in move.cost.items():
+                attribute = key.lower()
+                attr_value = getattr(self, attribute)
+                cost = value
+                new_value = attr_value + cost
+                setattr(self, attribute, new_value)
 
             # Attack missed
             if (hitdice > (move.accuracy * 100)) and self.status is not 'stunned':

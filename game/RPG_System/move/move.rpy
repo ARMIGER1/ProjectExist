@@ -24,7 +24,10 @@ init -1 python:
             ]
 
             for attribute in attributes:
-                set_default_value(args, attribute, 0)
+                if attribute is 'cost':
+                    set_default_value(args, attribute, {})
+                else:
+                    set_default_value(args, attribute, 0)
 
             # Transform all attributes into class attributes
             for key, value in self.args.items():

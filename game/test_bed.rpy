@@ -15,7 +15,7 @@ label combat_test:
         speed=14,
         intelligence=14,
         spirit=20,
-        moves=[struggle, pound, check, escape]
+        moves=[struggle, pound, check, warlocks_fist, escape]
     )
 
     $ test_enemy = Player('Shadow',

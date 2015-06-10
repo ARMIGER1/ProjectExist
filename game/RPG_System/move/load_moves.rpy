@@ -7,8 +7,7 @@ label load_moves:
         parameterplus=None,
         typea='physical',
         typeb='normal',
-        typec='close',
-        cost=['', '']
+        typec='close'
     )
 
     $ pound = Move('Pound',
@@ -21,8 +20,7 @@ label load_moves:
         parameterplus=None,
         typea='physical',
         typeb='normal',
-        typec='close',
-        cost=['', '']
+        typec='close'
     )
 
     $ check = Move('Check',
@@ -36,8 +34,7 @@ label load_moves:
         parameterplus=30,
         typea='physical',
         typeb='normal',
-        typec='close',
-        cost=['', '']
+        typec='close'
     )
 
     $ warlocks_fist = Move("Warlock's Fist",
@@ -52,7 +49,7 @@ label load_moves:
         typea='physical',
         typeb='dream',
         typec='close',
-        cost=[-4, 'SP']
+        cost={'sleep': -4}
     )
 
     $ escape = Move('Escape', typea='escape')
