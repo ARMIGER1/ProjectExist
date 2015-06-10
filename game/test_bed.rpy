@@ -1,7 +1,7 @@
 label combat_test:
     scene bg blackdrop
     # Combat test
-    # TODO: Load Moves
+    call load_moves
     # TODO: Load Players
     "Begin combat test!"
     # TODO: Start a battle
