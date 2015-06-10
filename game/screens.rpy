@@ -184,8 +184,8 @@ screen say:
     #show rpg stats code
     # automatically re-draw the GUI headers if necessary
     if(not in_debug):
-        if(showMCStatus):#the normal stats
-            $ show_combatant_stats(main_char, .02, .01)
+        # if(showMCStatus):#the normal stats
+            # $ show_combatant_stats(main_char, .02, .01)
         if(clock):#maybe we don't even need to check this variable...?
             $ Calendar()
             $ Clocks()
