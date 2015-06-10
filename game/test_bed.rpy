@@ -35,5 +35,6 @@ label combat_test:
     )
 
     "Begin combat test!"
-    # TODO: Start a battle
+
+    call battle(test_player, test_enemy)
     return
