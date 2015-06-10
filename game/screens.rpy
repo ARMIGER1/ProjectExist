@@ -22,7 +22,7 @@
 
     #########################################
     #!URGENT : WE NEED OUR OWN THEME!#
-    
+
     ## We then want to call a theme function. themes.roundrect is
     ## a theme that features the use of rounded rectangles. It's
     ## the only theme we currently support.
@@ -31,7 +31,7 @@
     ## customize the color scheme.
     theme.threeD(
         # Color scheme: Colorblind
-                                    
+
         ## The color of an idle widget face.
         widget = "#898989",
 
@@ -45,7 +45,7 @@
         ## example, the current value of a preference.)
         widget_selected = "#F2F2F2",
 
-        ## The color of a disabled widget face. 
+        ## The color of a disabled widget face.
         disabled = "#898989",
 
         ## The color of disabled widget text.
@@ -73,7 +73,7 @@
 
         ## And we're done with the theme. The theme will customize
         ## various styles, so if we want to change them, we should
-        ## do so below.            
+        ## do so below.
         )
 
     style.window.background = Frame("menus/FoxDialogueBox.png", 25, 25)
@@ -193,18 +193,18 @@ screen say:
             $ updateUI(intchange)
         if(walletshow):
             $ Wallet()
-            
+
     ############################################
     # Defaults
     default side_image = None
     default two_window = False
     default doublespeak = False
-    
+
     # Check for not doublespeak first
     if(not doublespeak):
         # Decide if we want to use the one-window or two-window varaint.
         if not two_window:
-            # The one window variant.        
+            # The one window variant.
             window:
                 id "window"
                 has vbox:
@@ -216,7 +216,7 @@ screen say:
             # The two window variant.
             vbox:
                 style "say_two_window_vbox"
-                if who:            
+                if who:
                     window:
                         style "say_who_window"
                         text who:
@@ -235,7 +235,7 @@ screen say:
     else:
         # Ignore SideImage
         if not two_window:
-            # The one window variant.        
+            # The one window variant.
             window:
                 xsize config.screen_width/2
                 xalign 0.0
@@ -259,7 +259,7 @@ screen say:
             vbox:
                 xsize config.screen_width/2
                 style "say_two_window_vbox"
-                if who:            
+                if who:
                     window:
                         style "say_who_window"
                         text who.items()[0][0]:
@@ -273,7 +273,7 @@ screen say:
                 xsize config.screen_width/2
                 xpos config.screen_width/2
                 style "say_two_window_vbox"
-                if who:            
+                if who:
                     window:
                         style "say_who_window"
                         text who.items()[1][0]:
@@ -283,7 +283,7 @@ screen say:
                     has vbox:
                         style "say_vbox"
                     text what[1] id "what" slow_cps True
-                    
+
     # Use the quick menu.
     use left_quick_menu
     use quick_menu
@@ -294,23 +294,23 @@ screen say:
 
 screen choice:
     $ in_menu = True
-    window: 
-        style "menu_window"        
+    window:
+        style "menu_window"
         xalign 0.5
         yalign 0.5
         vbox:
             style "menu"
             spacing 2
             for caption, action, chosen in items:
-                if action:  
+                if action:
                     button:
                         action action
-                        style "menu_choice_button"                        
+                        style "menu_choice_button"
                         text caption style "menu_choice"
                 else:
                     text caption style "menu_caption"
     $ in_menu = False
-        
+
 init -2 python:
     config.narrator_menu = True
     style.menu_window.set_parent(style.default)
@@ -330,7 +330,7 @@ screen input:
         input id "input"
 
     use quick_menu
-        
+
 ##############################################################################
 # Nvl
 #
@@ -393,11 +393,11 @@ screen nvl:
                         text caption style "nvl_dialogue"
 
     add SideImage() xalign 0.0 yalign 1.0
-    
+
     use quick_menu
-        
+
 ##############################################################################
-# Main Menu 
+# Main Menu
 #
 # http://www.renpy.org/doc/html/screen_special.html#main-menu
 
@@ -434,7 +434,7 @@ screen main_menu:
         textbutton "Report a Bug" action Help("game/modules/report.html")
         textbutton "Check for Updates" action ui.callsinnewcontext("pre_update")
         textbutton "Dyslexic?" action ui.callsinnewcontext("dyslexic") text_style "dys_button_text"
-        
+
 screen more_menu:
     # This ensures that any other menu screen is replaced.
     tag menu
@@ -450,7 +450,7 @@ screen more_menu:
         yalign .5
         xminimum 300
         has vbox
-        
+
         textbutton _("Music Room") action (SetVariable('playing', name_playing()), ShowMenu("music_room", "nopredict"))
         textbutton "Gallery" xminimum 300 action ShowMenu("gallery")
         textbutton "" action NullAction() style "empty_button"
@@ -465,7 +465,7 @@ init -2 python:
 
     # Make all the main menu buttons be the same size.
     style.mm_button.size_group = "mm"
-    
+
 
 
 ##############################################################################
@@ -483,7 +483,7 @@ screen navigation:
         style_group "gm_nav"
         xalign .98
         yalign .98
-        
+
         has vbox
 
         textbutton _("Return") action Return()
@@ -499,7 +499,7 @@ screen navigation:
 
 init -2 python:
     style.gm_nav_button.size_group = "gm_nav"
-    
+
 
 ##############################################################################
 # Save, Load
@@ -509,7 +509,7 @@ init -2 python:
 # Since saving and loading are so similar, we combine them into
 # a single screen, file_picker. We then use the file_picker screen
 # from simple load and save screens.
-    
+
 screen file_picker:
 
     frame:
@@ -521,7 +521,7 @@ screen file_picker:
         # page of files.
         hbox:
             style_group "file_picker_nav"
-            
+
             textbutton _("Previous"):
                 action FilePagePrevious()
 
@@ -534,19 +534,19 @@ screen file_picker:
             for i in range(1, 9):
                 textbutton str(i):
                     action FilePage(i)
-                    
+
             textbutton _("Next"):
                 action FilePageNext()
 
         $ columns = 2
         $ rows = 5
-                
+
         # Display a grid of file slots.
         grid columns rows:
             transpose True
             xfill True
             style_group "file_picker"
-            
+
             # Display ten file slots, numbered 1 - 10.
             for i in range(1, columns * rows + 1):
 
@@ -559,7 +559,7 @@ screen file_picker:
 
                     # Add the screenshot.
                     add FileScreenshot(i)
-                    
+
                     # Format the description, and add it as text.
                     $ description = "% 2s. %s\n%s" % (
                         FileSlotName(i, columns * rows),
@@ -569,8 +569,8 @@ screen file_picker:
                     text (description) size 18
 
                     key "save_delete" action FileDelete(i)
-                    
-                    
+
+
 screen save:
 
     # This ensures that any other menu screen is replaced.
@@ -596,12 +596,12 @@ init -2 python:
     style.file_picker_button = Style(style.large_button)
     style.file_picker_text = Style(style.large_button_text)
 
-    
+
 
 
 # Preferences
 # http://www.renpy.org/doc/html/screen_special.html#prefereces
-    
+
 screen preferences:
 
     tag menu
@@ -667,7 +667,7 @@ screen preferences:
                 label _("After Choices")
                 textbutton _("Stop Skipping") action Preference("after choices", "stop")
                 textbutton _("Keep Skipping") action Preference("after choices", "skip")
-           
+
             frame:
                 style_group "pref"
                 has vbox
@@ -716,7 +716,7 @@ screen preferences:
                 #    textbutton "Currently disabled\nat choices" action ui.callsinnewcontext("rollback_mode")
                 #else:
                 #    textbutton "Enabled\neverywhere" action ui.callsinnewcontext("rollback_mode")
-                    
+
 init -2 python:
     style.pref_frame.xfill = True
     style.pref_frame.xmargin = 5
@@ -738,7 +738,7 @@ init -2 python:
 #
 # Screen that asks the user a yes or no question.
 # http://www.renpy.org/doc/html/screen_special.html#yesno-prompt
-    
+
 screen yesno_prompt:
 
     modal True
@@ -753,24 +753,24 @@ screen yesno_prompt:
         ypos .1
         yanchor 0
         ypadding .05
-        
+
         has vbox:
             xalign .5
             yalign .5
             spacing 30
-            
+
         label _(message):
             xalign 0.5
 
         hbox:
             xalign 0.5
             spacing 100
-            
+
             textbutton _("Yes") action yes_action
             textbutton _("No") action no_action
 
 
-init -2 python:    
+init -2 python:
     style.yesno_button.size_group = "yesno"
     style.yesno_label_text.text_align = 0.5
 
@@ -781,7 +781,7 @@ init -2 python:
 screen left_quick_menu:
     hbox:
         style_group "quick"
-    
+
         xalign 0.0
         yalign 1.0
         textbutton _("Show Watches") action Function(show_watch)
@@ -792,7 +792,7 @@ screen quick_menu:
     # Add an in-game quick menu.
     hbox:
         style_group "quick"
-    
+
         xalign 1.0
         yalign 1.0
         if(notin_other_stats):
@@ -810,7 +810,7 @@ screen quick_menu:
             textbutton _("Memory") action ui.callsinnewcontext("audio_memory")
         if(not in_debug):
             textbutton _("Prefs") action ShowMenu('preferences')
-            
+
 screen updater:
 
     add "#000"

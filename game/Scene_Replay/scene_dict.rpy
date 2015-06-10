@@ -71,4 +71,3 @@
         'answers':["law_hesitation", "nat_will_try"],
         'minutes':596,
         'points':[-2, 0, 0, 0, 0, 0, 0, 0]}
-        
