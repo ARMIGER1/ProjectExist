@@ -56,10 +56,65 @@ init -1 python:
                     setattr(self, key, value)
 
         def attack(self, move, target):
-            pass
+            self.dealDamage(move, target)
 
         def calculateDamage(self, move, target):
-            pass
+            critdice = renpy.random.randint(0, 100)
+            critmod = 1
+
+            if (critdice <= 9):
+                critmod = 2
+                "It was a critical hit!"
+            if (move.typea == 'physical' or move.typea == 'projectile'):
+                defense = target.resistance
+
+            if (move.typea == 'physical'):
+                attack = self.strength
+            elif(move.typea == 'projectile'):
+                attack = self.dexterity
+            elif(move.typea == 'aural'):
+                attack = self.intelligence
+                defense = target.spirit
+
+            sect1 = (self.level * 2 / 5) + 2
+            sect2 = move.power
+            sect3 = attack
+            sect4 = defense
+            sect5 = 1
+
+            battledice = renpy.random.randint(85, 100)
+
+            damage = ((((((sect1 * sect2 * sect3 / 50) / sect4)) + 2) * critmod * battledice / 100) * sect5)
+
+            return damage
 
         def dealDamage(self, move, target):
-            pass
+            # Try to attack
+            hitdice = renpy.random.randint(0, 100)
+
+            # TODO: Subtract relevant move costs
+
+            # Attack missed
+            if (hitdice > (move.accuracy * 100)) and self.status is not 'stunned':
+                renpy.say(None, "%s used %s, but the attack missed...{fast}" % (self.name, move.name))
+            elif self.status is 'stunned':
+                # Player is stunned
+                renpy.say(None, "%s is stunned and cannot move!" % (self.name))
+            else:
+                renpy.say(None, "%s used %s!" % (self.name, move.name))
+                renpy.say(None, "Damage dealt to %s!" % target.name)
+
+                damage = self.calculateDamage(move, target)
+
+                target.hp -= damage
+
+                if target.hp < 0:
+                    target.hp = 0
+
+                renpy.say(None, "%s took %d HP from %s.  %s's HP is now %d!" % (self.name, damage, target.name, target.name, target.hp))
+
+                if (move.parameter == 'stun'):
+                    statdice = renpy.random.randint(0, 100)
+                    if (statdice < move.parameterplus):
+                        target.status = 'stunned'
+                        renpy.say(None, '%s is stunned!' % target.name)
