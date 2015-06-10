@@ -21,13 +21,13 @@ init -1 python:
             ]
 
             player_attributes = [
-                'HP',
+                'hp',
                 'maxHP',
                 'belly',
                 'maxBelly',
                 'sleep',
                 'maxSleep',
-                'XP',
+                'xp',
                 'maxXP'
             ]
 
